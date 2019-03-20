@@ -1,27 +1,6 @@
 namespace Turkey{
 
-    /**
-     * Registers the runtime class information for a class.This method adds some strings which represent the class name or
-     * some interface names to the class definition. After the registration,you can use egret.is() method to do the type checking
-     * for the instance of this class.<br/>
-     * Note:If you use the TypeScript programming language, the egret command line tool will automatically generate the registration code line.
-     * You don't need to manually call this method.
-     *
-     * @example the following code shows how to register the runtime class information for the EventDispatcher class and do the type checking:
-     * <pre>
-     *      egret.registerClass(egret.EventDispatcher,"egret.EventDispatcher",["egret.IEventDispatcher"]);
-     *      let dispatcher = new egret.EventDispatcher();
-     *      egret.log(egret.is(dispatcher, "egret.IEventDispatcher"));  //true。
-     *      egret.log(egret.is(dispatcher, "egret.EventDispatcher"));   //true。
-     *      egret.log(egret.is(dispatcher, "egret.Bitmap"));   //false。
-     * </pre>
-     * @param classDefinition the class definition to be registered.
-     * @param className  a unique identification string of the specific class
-     * @param interfaceNames a list of unique identification string of the specific interfaces.
-     * @version Egret 2.4
-     * @platform Web,Native
-     * @language en_US
-     */
+    
     /**
      * 为一个类定义注册运行时类信息,用此方法往类定义上注册它自身以及所有接口对应的字符串。
      * 在运行时，这个类的实例将可以使用 egret.is() 方法传入一个字符串来判断实例类型。
