@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "sourceMap": false,
+        "declaration": false,
+        "allowUnreachableCode": true,
+        "outDir": "bin/",
+        "newLine": "LF",
+        "lib": [
+            "es5",
+            "dom",
+            "es2015.promise",
+            "scripthost"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
