@@ -14,10 +14,9 @@ namespace Turkey.web {
         public context: WebGLRenderContext;
 
         /**
-         * 如果是舞台缓存，为canvas
          * 如果是普通缓存，为renderTarget
          */
-        public surface: any;
+        public surface: WebGLRenderTarget;
 
         /**
          * root render target
@@ -25,13 +24,8 @@ namespace Turkey.web {
          */
         public rootRenderTarget: WebGLRenderTarget;
 
-        /**
-         * 是否为舞台buffer
-         */
-        private root: boolean;
 
-
-        public constructor(width?: number, height?: number, root?: boolean) {
+        public constructor(width?: number, height?: number) {
             super();
             // 获取webglRenderContext
             this.context = WebGLRenderContext.getInstance();
@@ -42,24 +36,14 @@ namespace Turkey.web {
                 this.resize(width, height);
             }
 
-            // 如果是第一个加入的buffer，说明是舞台buffer
-            this.root = root;
-
-            // 如果是用于舞台渲染的renderBuffer，则默认添加renderTarget到renderContext中，而且是第一个
-            if (this.root) {
-                this.context.pushBuffer(this);
-                // 画布
-                this.surface = this.context.surface;
-                this.$computeDrawCall = true;
-            } else {
-                // 由于创建renderTarget造成的frameBuffer绑定，这里重置绑定
-                let lastBuffer = this.context.activatedBuffer;
-                if (lastBuffer) {
-                    lastBuffer.rootRenderTarget.activate();
-                }
-                this.rootRenderTarget.initFrameBuffer();
-                this.surface = this.rootRenderTarget;
+            // 由于创建renderTarget造成的frameBuffer绑定，这里重置绑定
+            let lastBuffer = this.context.activatedBuffer;
+            if (lastBuffer) {
+                lastBuffer.rootRenderTarget.activate();
             }
+            this.rootRenderTarget.initFrameBuffer();
+            this.surface = this.rootRenderTarget;
+            
         }
 
         public globalAlpha: number = 1;
@@ -98,7 +82,7 @@ namespace Turkey.web {
          * scissor 开关状态  
          */
         public $scissorState: boolean = false;
-        private scissorRect: Rectangle = new egret.Rectangle();
+        private scissorRect: Rectangle = new Turkey.Rectangle();
         public $hasScissor: boolean = false;
 
         public enableScissor(x: number, y: number, width: number, height: number): void {
@@ -130,12 +114,7 @@ namespace Turkey.web {
          * @readOnly
          */
         public get width(): number {
-            if (egret.nativeRender) {
-                return this.surface.width;
-            }
-            else {
-                return this.rootRenderTarget.width;
-            }
+            return this.rootRenderTarget.width;
         }
 
         /**
@@ -163,10 +142,7 @@ namespace Turkey.web {
                 this.rootRenderTarget.width = width;
                 this.rootRenderTarget.height = height;
             }
-            // 如果是舞台的渲染缓冲，执行resize，否则surface大小不随之改变
-            if (this.root) {
-                this.context.resize(width, height, useMaxSize);
-            }
+            // surface大小不随之改变
             this.context.clear();
             this.context.popBuffer();
         }
@@ -227,60 +203,7 @@ namespace Turkey.web {
         public onRenderFinish(): void {
             this.$drawCalls = 0;
         }
-
-        /**
-         * 交换frameBuffer中的图像到surface中
-         * @param width 宽度
-         * @param height 高度
-         */
-        private drawFrameBufferToSurface(sourceX: number,
-            sourceY: number, sourceWidth: number, sourceHeight: number, destX: number, destY: number, destWidth: number, destHeight: number, clear: boolean = false): void {
-            this.rootRenderTarget.useFrameBuffer = false;
-            this.rootRenderTarget.activate();
-
-            this.context.disableStencilTest();// 切换frameBuffer注意要禁用STENCIL_TEST
-            this.context.disableScissorTest();
-
-            this.setTransform(1, 0, 0, 1, 0, 0);
-            this.globalAlpha = 1;
-            this.context.setGlobalCompositeOperation("source-over");
-            clear && this.context.clear();
-            this.context.drawImage(<BitmapData><any>this.rootRenderTarget, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, sourceWidth, sourceHeight, false);
-            this.context.$drawWebGL();
-
-            this.rootRenderTarget.useFrameBuffer = true;
-            this.rootRenderTarget.activate();
-
-            this.restoreStencil();
-            this.restoreScissor();
-        }
-
-        /**
-         * 交换surface的图像到frameBuffer中
-         * @param width 宽度
-         * @param height 高度
-         */
-        private drawSurfaceToFrameBuffer(sourceX: number,
-            sourceY: number, sourceWidth: number, sourceHeight: number, destX: number, destY: number, destWidth: number, destHeight: number, clear: boolean = false): void {
-            this.rootRenderTarget.useFrameBuffer = true;
-            this.rootRenderTarget.activate();
-
-            this.context.disableStencilTest();// 切换frameBuffer注意要禁用STENCIL_TEST
-            this.context.disableScissorTest();
-
-            this.setTransform(1, 0, 0, 1, 0, 0);
-            this.globalAlpha = 1;
-            this.context.setGlobalCompositeOperation("source-over");
-            clear && this.context.clear();
-            this.context.drawImage(<BitmapData><any>this.context.surface, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, sourceWidth, sourceHeight, false);
-            this.context.$drawWebGL();
-
-            this.rootRenderTarget.useFrameBuffer = false;
-            this.rootRenderTarget.activate();
-
-            this.restoreStencil();
-            this.restoreScissor();
-        }
+      
 
         /**
          * 清空缓冲区数据
@@ -362,8 +285,6 @@ namespace Turkey.web {
          */
         public static create(width: number, height: number): WebGLRenderBuffer {
             let buffer = renderBufferPool.pop();
-            // width = Math.min(width, 1024);
-            // height = Math.min(height, 1024);
             if (buffer) {
                 buffer.resize(width, height);
                 var matrix = buffer.globalMatrix;

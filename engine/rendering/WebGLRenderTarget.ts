@@ -9,19 +9,29 @@ namespace Turkey.web {
 
         private gl: WebGLRenderingContext;
 
-        // 存储着绘制结果的texture
-        // 某些场景下是否需要一个切换方法？
+        /**
+         * 存储着绘制结果的texture
+         * 某些场景下是否需要一个切换方法？
+         */
         public texture: WebGLTexture;
 
+        /**
+         * 是否启用frame buffer, 默认为true
+         */
+        public useFrameBuffer: boolean = true;
         private frameBuffer: WebGLFramebuffer;
 
         private stencilBuffer: WebGLRenderbuffer;
 
-        // render target 的尺寸，与texture和stencil buffer的尺寸一致
+        /**
+         * render target 的尺寸，与texture和stencil buffer的尺寸一致
+         */
         public width: number;
         public height: number;
 
-        // 清除色
+        /**
+         * 清除色
+         */
         public clearColor = [0, 0, 0, 0];
 
         public constructor(gl: WebGLRenderingContext, width: number, height: number) {
@@ -62,8 +72,6 @@ namespace Turkey.web {
             gl.bindFramebuffer(gl.FRAMEBUFFER, this.getFrameBuffer());
         }
 
-        // 是否启用frame buffer, 默认为true
-        public useFrameBuffer: boolean = true;
         /**
          * 获取frame buffer
          */

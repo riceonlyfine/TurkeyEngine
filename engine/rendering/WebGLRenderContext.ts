@@ -70,6 +70,33 @@ namespace Turkey.web {
          */
         private currentBuffer: WebGLRenderBuffer;
 
+
+
+        public constructor() {
+
+            this.surface = createCanvas();
+
+            this.initWebGL();
+
+            this.$bufferStack = [];
+
+            let gl = this.context;
+            this.vertexBuffer = gl.createBuffer();
+            this.indexBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+
+            this.drawCmdManager = new WebGLDrawCmdManager();
+
+            this.vao = new WebGLVertexArrayObject();
+            this.setBatchSize(2000);
+
+            this.setGlobalCompositeOperation("source-over");
+
+            this.firstTimeUploadVertices = true;
+
+        }
+
         /**
          * 推入一个RenderBuffer并绑定
          */
@@ -78,16 +105,10 @@ namespace Turkey.web {
             this.$bufferStack.push(buffer);
 
             if (buffer != this.currentBuffer) {
-
-                if (this.currentBuffer) {
-                    // this.$drawWebGL();
-                }
-
                 this.drawCmdManager.pushActivateBuffer(buffer);
             }
 
             this.currentBuffer = buffer;
-
         }
 
         /**
@@ -106,13 +127,12 @@ namespace Turkey.web {
 
             // 重新绑定
             if (buffer != lastBuffer) {
-                // this.$drawWebGL();
-
                 this.drawCmdManager.pushActivateBuffer(lastBuffer);
             }
 
             this.currentBuffer = lastBuffer;
         }
+
         /**
          * 启用RenderBuffer
          */
@@ -153,30 +173,7 @@ namespace Turkey.web {
         private vertexBuffer;
         private indexBuffer;
 
-        public constructor() {
-
-            this.surface = createCanvas();
-
-            this.initWebGL();
-
-            this.$bufferStack = [];
-
-            let gl = this.context;
-            this.vertexBuffer = gl.createBuffer();
-            this.indexBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
-
-            this.drawCmdManager = new WebGLDrawCmdManager();
-
-            this.vao = new WebGLVertexArrayObject();
-            this.setBatchSize(2000);
-
-            this.setGlobalCompositeOperation("source-over");
-
-            this.firstTimeUploadVertices = true;
-
-        }
+        
 
         public setBatchSize(size: number): void {
             const result = this.vao.setBatchSize(size);
@@ -316,7 +313,7 @@ namespace Turkey.web {
         /**
          * 开启scissor检测
          */
-        public enableScissorTest(rect: egret.Rectangle): void {
+        public enableScissorTest(rect: Turkey.Rectangle): void {
             let gl: any = this.context;
             gl.enable(gl.SCISSOR_TEST);
             gl.scissor(rect.x, rect.y, rect.width, rect.height);
@@ -401,37 +398,6 @@ namespace Turkey.web {
                 }
             }
             return bitmapData.webGLTexture;
-        }
-
-        /**
-         * 清除矩形区域
-         */
-        //目前没有引用
-        public clearRect(x: number, y: number, width: number, height: number): void {
-            if (x != 0 || y != 0 || width != this.surface.width || height != this.surface.height) {
-                let buffer = this.currentBuffer;
-                if (buffer.$hasScissor) {
-                    this.setGlobalCompositeOperation("destination-out");
-                    this.setGlobalCompositeOperation("source-over");
-                } else {
-                    let m = buffer.globalMatrix;
-                    if (m.b == 0 && m.c == 0) {
-                        x = x * m.a + m.tx;
-                        y = y * m.d + m.ty;
-                        width = width * m.a;
-                        height = height * m.d;
-                        this.enableScissor(x, - y - height + buffer.height, width, height);
-                        this.clear();
-                        this.disableScissor();
-                    } else {
-                        this.setGlobalCompositeOperation("destination-out");
-                        // this.drawRect(x, y, width, height);
-                        this.setGlobalCompositeOperation("source-over");
-                    }
-                }
-            } else {
-                this.clear();
-            }
         }
 
         /**
