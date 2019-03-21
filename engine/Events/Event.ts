@@ -441,27 +441,7 @@ namespace Turkey{
             return props;
         }
 
-        /**
-         * Gets one event instance from the object pool or create a new one. We highly recommend using the Event.create()
-         * and Event.release() methods to create and release an event object,it can reduce the number of reallocate objects,
-         * which allows you to get better code execution performance.<br/>
-         * Note: If you want to use this method to initialize your custom event object,you must make sure the constructor
-         * of your custom event is the same as the constructor of egret.Event.
-         * @param EventClass Event Class。
-         * @param type  The type of the event, accessible as Event.type.
-         * @param bubbles  Determines whether the Event object participates in the bubbling stage of the event flow. The default value is false.
-         * @param cancelable Determines whether the Event object can be canceled. The default values is false.
-         * @example
-         * <pre>
-         *    let event = Event.create(Event,type, bubbles);
-         *    event.data = data;    //optional,initializes custom data here
-         *    this.dispatchEvent(event);
-         *    Event.release(event);
-         * </pre>
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
+      
         /**
          * 从对象池中取出或创建一个新的事件实例。我们建议您尽可能使用Event.create()和Event.release() 这一对方法来创建和释放事件对象，
          * 这一对方法会将事件实例在内部缓存下来供下次循环使用，减少对象的创建次数,从而获得更高的代码运行性能。<br/>
@@ -507,24 +487,6 @@ namespace Turkey{
             return new EventClass(type, bubbles, cancelable);
         }
 
-        /**
-         * Releases an event object and cache it into the object pool.We highly recommend using the Event.create()
-         * and Event.release() methods to create and release an event object,it can reduce the number of reallocate objects,
-         * which allows you to get better code execution performance.<br/>
-         * Note: The parameters of this method only accepts an instance created by the Event.create() method.
-         * if not,it may throw an error.
-         * @example
-         * <pre>
-         *    let event = Event.create(Event,type, bubbles);
-         *    event.data = data; //optional,initializes custom data here
-         *    this.dispatchEvent(event);
-         *    Event.release(event);
-         * </pre>
-         * @see #clean()
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
         /**
          * 释放一个事件对象，并缓存到对象池。我们建议您尽可能使用Event.create()和Event.release() 这一对方法来创建和释放事件对象，
          * 这一对方法会将事件实例在内部缓存下来供下次循环使用，减少对象的创建次数,从而获得更高的代码运行性能。<br/>

@@ -48,6 +48,31 @@ namespace Turkey.web {
             return this.instance;
         }
 
+
+        private constructor() {
+            this.surface = createCanvas();
+
+            this.initWebGL();
+
+            this.$bufferStack = [];
+
+            let gl = this.context;
+            this.vertexBuffer = gl.createBuffer();
+            this.indexBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
+
+            this.drawCmdManager = new WebGLDrawCmdManager();
+
+            this.vao = new WebGLVertexArrayObject();
+            this.setBatchSize(2000);
+
+            this.setGlobalCompositeOperation("source-over");
+
+            this.firstTimeUploadVertices = true;
+
+        }
+
         public $maxTextureSize: number;
 
         /**
@@ -72,30 +97,7 @@ namespace Turkey.web {
 
 
 
-        public constructor() {
-
-            this.surface = createCanvas();
-
-            this.initWebGL();
-
-            this.$bufferStack = [];
-
-            let gl = this.context;
-            this.vertexBuffer = gl.createBuffer();
-            this.indexBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.indexBuffer);
-
-            this.drawCmdManager = new WebGLDrawCmdManager();
-
-            this.vao = new WebGLVertexArrayObject();
-            this.setBatchSize(2000);
-
-            this.setGlobalCompositeOperation("source-over");
-
-            this.firstTimeUploadVertices = true;
-
-        }
+       
 
         /**
          * 推入一个RenderBuffer并绑定
