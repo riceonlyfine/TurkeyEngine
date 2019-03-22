@@ -1,3 +1,15 @@
+
+///<reference path="../Events/EventDispatcher.ts"  />
+///<reference path="../geom/Matrix.ts"  />
+///<reference path="../geom/Rectangle.ts"  />
+///<reference path="../filters/Filter.ts"  />
+///<reference path="../filters/CustomFilter.ts"  />
+///<reference path="../filters/BlurFilter.ts"  />
+///<reference path="../filters/GlowFilter.ts"  />
+///<reference path="../filters/DropShadowFilter.ts"  />
+///<reference path="../player/nodes/RenderNode.ts"  />
+///<reference path="../utils/NumberUtils.ts"  />
+
 namespace Turkey {
 
     /**
@@ -34,17 +46,17 @@ namespace Turkey {
         * 但是对于广播事件，目标不是特定的 DisplayObject 实例，而是所有 DisplayObject 实例（包括那些不在显示列表中的实例）。这意味着您可以向任何
         * DisplayObject 实例添加侦听器来侦听广播事件。
         *
-        * @event egret.Event.ADDED 将显示对象添加到显示列表中时调度。
-        * @event egret.Event.ADDED_TO_STAGE 在将显示对象直接添加到舞台显示列表或将包含显示对象的子树添加至舞台显示列表中时调度。
-        * @event egret.Event.REMOVED 将要从显示列表中删除显示对象时调度。
-        * @event egret.Event.REMOVED_FROM_STAGE 在从显示列表中直接删除显示对象或删除包含显示对象的子树时调度。
-        * @event egret.Event.ENTER_FRAME [广播事件] 播放头进入新帧时调度。
-        * @event egret.Event.RENDER [广播事件] 将要更新和呈现显示列表时调度。
-        * @event egret.TouchEvent.TOUCH_MOVE 当用户触碰设备时进行调度，而且会连续调度，直到接触点被删除。
-        * @event egret.TouchEvent.TOUCH_BEGIN 当用户第一次触摸启用触摸的设备时（例如，用手指触摸手机屏幕）调度。
-        * @event egret.TouchEvent.TOUCH_END 当用户移除与启用触摸的设备的接触时（例如，将手指从屏幕上抬起）调度。
-        * @event egret.TouchEvent.TOUCH_TAP 当用户在启用触摸设备上的已启动接触的同一 DisplayObject 实例上抬起接触点时（例如，手机点击屏幕后抬起）调度。
-        * @event egret.TouchEvent.TOUCH_RELEASE_OUTSIDE 当用户在启用触摸设备上的已启动接触的不同 DisplayObject 实例上抬起接触点时（例如，按住屏幕上的某个对象,然后从它上面挪开后再松开手指）调度。
+        * @event Turkey.Event.ADDED 将显示对象添加到显示列表中时调度。
+        * @event Turkey.Event.ADDED_TO_STAGE 在将显示对象直接添加到舞台显示列表或将包含显示对象的子树添加至舞台显示列表中时调度。
+        * @event Turkey.Event.REMOVED 将要从显示列表中删除显示对象时调度。
+        * @event Turkey.Event.REMOVED_FROM_STAGE 在从显示列表中直接删除显示对象或删除包含显示对象的子树时调度。
+        * @event Turkey.Event.ENTER_FRAME [广播事件] 播放头进入新帧时调度。
+        * @event Turkey.Event.RENDER [广播事件] 将要更新和呈现显示列表时调度。
+        * @event Turkey.TouchEvent.TOUCH_MOVE 当用户触碰设备时进行调度，而且会连续调度，直到接触点被删除。
+        * @event Turkey.TouchEvent.TOUCH_BEGIN 当用户第一次触摸启用触摸的设备时（例如，用手指触摸手机屏幕）调度。
+        * @event Turkey.TouchEvent.TOUCH_END 当用户移除与启用触摸的设备的接触时（例如，将手指从屏幕上抬起）调度。
+        * @event Turkey.TouchEvent.TOUCH_TAP 当用户在启用触摸设备上的已启动接触的同一 DisplayObject 实例上抬起接触点时（例如，手机点击屏幕后抬起）调度。
+        * @event Turkey.TouchEvent.TOUCH_RELEASE_OUTSIDE 当用户在启用触摸设备上的已启动接触的不同 DisplayObject 实例上抬起接触点时（例如，按住屏幕上的某个对象,然后从它上面挪开后再松开手指）调度。
         * @version Egret 2.4
         * @platform Web,Native
         * @includeExample egret/display/DisplayObject.ts
@@ -78,7 +90,6 @@ namespace Turkey {
         $hasChildren: boolean = false;
 
         private $name: string = "";
-
 
         /**
          * 表示 DisplayObject 的实例名称。
@@ -568,7 +579,7 @@ namespace Turkey {
 
         /**
          * 表示DisplayObject的x方向斜切
-         * @member {number} egret.DisplayObject#skewX
+         * @member {number} Turkey.DisplayObject#skewX
          * @default 0
          * @version Egret 2.4
          * @platform Web,Native
@@ -619,7 +630,7 @@ namespace Turkey {
 
         /**
          * 表示DisplayObject的y方向斜切
-         * @member {number} egret.DisplayObject#skewY
+         * @member {number} Turkey.DisplayObject#skewY
          * @default 0
          * @version Egret 2.4
          * @platform Web,Native
@@ -745,7 +756,7 @@ namespace Turkey {
         /**
          * 测量宽度
          * @returns {number}
-         * @member {egret.Rectangle} egret.DisplayObject#measuredWidth
+         * @member {Turkey.Rectangle} Turkey.DisplayObject#measuredWidth
          * @version Egret 2.4
          * @platform Web,Native
          */
@@ -756,7 +767,7 @@ namespace Turkey {
         /**
          * 测量高度
          * @returns {number}
-         * @member {egret.Rectangle} egret.DisplayObject#measuredWidth
+         * @member {Turkey.Rectangle} Turkey.DisplayObject#measuredWidth
          * @version Egret 2.4
          * @platform Web,Native
          */
@@ -1034,7 +1045,7 @@ namespace Turkey {
          * 指定此对象是否接收触摸或其他用户输入。默认值为 false，这表示默认情况下，显示列表上的任何 DisplayObject 实例都不会接收触摸事件或
          * 其他用户输入事件。如果将 touchEnabled 设置为 false，则实例将不接收任何触摸事件（或其他用户输入事件）。显示列表上的该实例的任
          * 何子级都不会受到影响。要更改显示列表上对象的所有子级的 touchEnabled 行为，请使用 DisplayObjectContainer.touchChildren。
-         * @see egret.DisplayObjectContainer#touchChildren
+         * @see Turkey.DisplayObjectContainer#touchChildren
          * @default false
          * @version Egret 2.4
          * @platform Web,Native
@@ -1135,8 +1146,8 @@ namespace Turkey {
         /**
          * BlendMode 枚举中的一个值，用于指定要使用的混合模式，确定如何将一个源（新的）图像绘制到目标（已有）的图像上<br/>
          * 如果尝试将此属性设置为无效值，则运行时会将此值设置为 BlendMode.NORMAL。
-         * @default egret.BlendMode.NORMAL
-         * @see egret.BlendMode
+         * @default Turkey.BlendMode.NORMAL
+         * @see Turkey.BlendMode
          * @version Egret 2.4
          * @platform Web,Native
          * @language zh_CN
@@ -1356,7 +1367,7 @@ namespace Turkey {
          * @platform Web,Native
          * @language zh_CN
          */
-        public getBounds(resultRect?: Rectangle, calculateAnchor: boolean = true): egret.Rectangle {
+        public getBounds(resultRect?: Rectangle, calculateAnchor: boolean = true): Turkey.Rectangle {
             let self = this;
             resultRect = self.$getTransformedBounds(self, resultRect);
             if (calculateAnchor) {
@@ -1733,6 +1744,7 @@ namespace Turkey {
                 else {
                     let buffer = sys.customHitTestBuffer;
                     buffer.resize(3, 3);
+                    
                     let matrix = Matrix.create();
                     matrix.identity();
                     matrix.translate(1 - localX, 1 - localY);

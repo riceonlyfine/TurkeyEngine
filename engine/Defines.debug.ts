@@ -1,5 +1,7 @@
 
 ///<reference path="./utils/getDefinitionByName.ts"  />
+///<reference path="./utils/HashObject.ts"  />
+///<reference path="./i18n/Language.ts"  />
 
 /**
  * 是否为 debug 模式。
@@ -7,24 +9,19 @@
  * @platform Web,Native
  * @language zh_CN
  */
-declare let DEBUG: boolean;
+var DEBUG: boolean = true;
 
-/**
- * Is release mode.
- * @version Egret 2.5
- * @platform Web,Native
- * @language en_US
- */
+
 /**
  * 是否为 release 模式。
  * @version Egret 2.5
  * @platform Web,Native
  * @language zh_CN
  */
-declare let RELEASE: boolean;
+// declare let RELEASE: boolean;
 
-global.DEBUG = true;
-global.RELEASE = false;
+// global.DEBUG = true;
+// global.RELEASE = false;
 
 namespace Turkey {
     /**

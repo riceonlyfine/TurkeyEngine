@@ -1080,7 +1080,7 @@ namespace Turkey.web {
                     if (value !== undefined) {
                         uniforms[key].setValue(value);
                     } else {
-                        // egret.warn("filter custom: uniform " + key + " not defined!");
+                        // Turkey.warn("filter custom: uniform " + key + " not defined!");
                     }
                 }
             }

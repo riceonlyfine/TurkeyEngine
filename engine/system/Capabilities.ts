@@ -97,9 +97,9 @@ namespace Turkey {
         /**
          * 指示当前的运行类型。runtimeType 属性返回下列字符串：
          * <ul>
-         * <li>运行在Web上     egret.RuntimeType.WEB</li>
-         * <li>运行在Runtime2.0上     egret.RuntimeType.RUNTIME2</li>
-         * <li>运行在微信小游戏上    egret.RuntimeType.WXGAME</li>
+         * <li>运行在Web上     Turkey.RuntimeType.WEB</li>
+         * <li>运行在Runtime2.0上     Turkey.RuntimeType.RUNTIME2</li>
+         * <li>运行在微信小游戏上    Turkey.RuntimeType.WXGAME</li>
          * </ul>
          * @version Egret 2.4
          * @platform Web,Native

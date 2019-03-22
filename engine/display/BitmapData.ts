@@ -1,3 +1,5 @@
+///<reference path="../utils/DataStructure.ts"  />
+
 namespace Turkey{
 
     /**
@@ -5,7 +7,7 @@ namespace Turkey{
      * 以上任一类型的 BitmapData 对象都作为 32 位整数的缓冲区进行存储。每个 32 位整数确定位图中单个像素的属性。<br/>
      * 每个 32 位整数都是四个 8 位通道值（从 0 到 255）的组合，这些值描述像素的 Alpha 透明度以及红色、绿色、蓝色 (ARGB) 值。
      * （对于 ARGB 值，最高有效字节代表 Alpha 通道值，其后的有效字节分别代表红色、绿色和蓝色通道值。）
-     * @see egret.Bitmap
+     * @see Turkey.Bitmap
      * @version Egret 2.4
      * @platform Web,Native
      * @language zh_CN
@@ -137,7 +139,7 @@ namespace Turkey{
 
 
 
-        private static _displayList = egret.createMap<DisplayObject[]>();
+        private static _displayList = Turkey.createMap<DisplayObject[]>();
         static $addDisplayObject(displayObject: DisplayObject, bitmapData: BitmapData): void {
             if (!bitmapData) {
                 return;
@@ -187,8 +189,8 @@ namespace Turkey{
             }
             let tempList: Array<DisplayObject> = BitmapData._displayList[hashCode];
             for (let i: number = 0; i < tempList.length; i++) {
-                if (tempList[i] instanceof egret.Bitmap) {
-                    (<egret.Bitmap>tempList[i]).$refreshImageData();
+                if (tempList[i] instanceof Turkey.Bitmap) {
+                    (<Turkey.Bitmap>tempList[i]).$refreshImageData();
                 }
                 let bitmap = tempList[i];
                 bitmap.$renderDirty = true;
@@ -218,7 +220,7 @@ namespace Turkey{
             }
             let tempList = BitmapData._displayList[hashCode];
             for (let node of tempList) {
-                if (node instanceof egret.Bitmap) {
+                if (node instanceof Turkey.Bitmap) {
                     node.$bitmapData = null;
                 }
                 node.$renderDirty = true;

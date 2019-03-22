@@ -5,7 +5,7 @@ namespace Turkey{
      * 您可以生成一些模糊效果，范围从创建一个柔化的、未聚焦的外观到高斯模糊（就像通过半透明玻璃查看图像一样的朦胧的外观）。
      * @version Egret 3.1.0
      * @platform Web
-     * @see http://edn.egret.com/cn/docs/page/947#模糊滤镜 模糊滤镜
+     * @see http://edn.Turkey.com/cn/docs/page/947#模糊滤镜 模糊滤镜
      * @language zh_CN
      */
     export class BlurFilter extends Filter {

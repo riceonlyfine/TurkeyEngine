@@ -79,13 +79,13 @@ namespace Turkey.sys{
             node.image = image;
             node.imageWidth = sourceWidth;
             node.imageHeight = sourceHeight;
-            if (fillMode == egret.BitmapFillMode.SCALE) {
+            if (fillMode == Turkey.BitmapFillMode.SCALE) {
                 let tsX: number = destW / textureWidth * scale;
                 let tsY: number = destH / textureHeight * scale;
                 node.drawImage(bitmapX, bitmapY,
                     bitmapWidth, bitmapHeight, tsX * offsetX, tsY * offsetY, tsX * bitmapWidth, tsY * bitmapHeight);
             }
-            else if (fillMode == egret.BitmapFillMode.CLIP) {
+            else if (fillMode == Turkey.BitmapFillMode.CLIP) {
                 let displayW: number = Math.min(textureWidth, destW);
                 let displayH: number = Math.min(textureHeight, destH);
                 let scaledBitmapW = bitmapWidth * scale;
@@ -112,7 +112,7 @@ namespace Turkey.sys{
          * @private
          * 绘制九宫格位图
          */
-        static $updateTextureDataWithScale9Grid(node: sys.NormalBitmapNode, image: BitmapData, scale9Grid: egret.Rectangle, bitmapX: number, bitmapY: number,
+        static $updateTextureDataWithScale9Grid(node: sys.NormalBitmapNode, image: BitmapData, scale9Grid: Turkey.Rectangle, bitmapX: number, bitmapY: number,
             bitmapWidth: number, bitmapHeight: number, offsetX: number, offsetY: number,
             textureWidth: number, textureHeight: number, destW: number, destH: number, sourceWidth: number, sourceHeight: number, smoothing: boolean): void {
             node.smoothing = smoothing;

@@ -1,10 +1,10 @@
 namespace Turkey{
 
      /**
-     * @class egret.GlowFilter
+     * @class Turkey.GlowFilter
      * @classdesc
      * 使用 GlowFilter 类可以对显示对象应用发光效果。在投影滤镜的 distance 和 angle 属性设置为 0 时，发光滤镜与投影滤镜极为相似。
-     * @extends egret.Filter
+     * @extends Turkey.Filter
      * @version Egret 3.1.4
      * @platform Web,Native
      */
@@ -24,7 +24,7 @@ namespace Turkey{
    
         /**
          * 初始化 GlowFilter 对象
-         * @method egret.GlowFilter#constructor
+         * @method Turkey.GlowFilter#constructor
          * @param color {number} 光晕颜色，采用十六进制格式 0xRRGGBB。默认值为 0xFF0000。
          * @param alpha {number} 颜色的 Alpha 透明度值。有效值为 0 到 1。例如，0.25 设置透明度值为 25%。
          * @param blurX {number} 水平模糊量。有效值为 0 到 255（浮点）。

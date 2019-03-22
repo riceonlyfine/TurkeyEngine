@@ -6,7 +6,7 @@ namespace Turkey {
 
     //core  1000-1999
     locale_strings[1001] = "Could not find Egret entry class: {0}。";
-    locale_strings[1002] = "Egret entry class '{0}' must inherit from egret.DisplayObject.";
+    locale_strings[1002] = "Egret entry class '{0}' must inherit from Turkey.DisplayObject.";
     locale_strings[1003] = "Parameter {0} must be non-null.";
     locale_strings[1004] = "An object cannot be added as a child to one of it's children (or children's children, etc.).";
     locale_strings[1005] = "An object cannot be added as a child of itself.";
@@ -47,7 +47,7 @@ namespace Turkey {
     locale_strings[1044] = "The current version of the Runtime does not support video playback, please use the latest version";
     locale_strings[1045] = "The resource url is not found";
     locale_strings[1046] = "BitmapText no corresponding characters: {0}, please check the configuration file";
-    locale_strings[1047] = "egret.localStorage.setItem save failed,key={0}&value={1}";
+    locale_strings[1047] = "Turkey.localStorage.setItem save failed,key={0}&value={1}";
     locale_strings[1048] = "Video loading failed";
     locale_strings[1049] = "In the absence of sound is not allowed to play after loading";
     locale_strings[1050] = "ExternalInterface calls the method without js registration: {0}";

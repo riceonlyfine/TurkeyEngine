@@ -29,7 +29,7 @@ namespace Turkey{
 
 
         /**
-         * 创建一个 egret.FocusEvent 对象
+         * 创建一个 Turkey.FocusEvent 对象
          * @param type  事件的类型，可以作为 Event.type 访问。
          * @param bubbles  确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
          * @param cancelable 确定是否可以取消 Event 对象。默认值为 false。

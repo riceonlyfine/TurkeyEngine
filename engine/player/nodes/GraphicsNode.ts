@@ -42,12 +42,12 @@ namespace Turkey.sys{
          * @param colors 渐变中使用的 RGB 十六进制颜色值的数组（例如，红色为 0xFF0000，蓝色为 0x0000FF，等等）。对于每种颜色，请在 alphas 和 ratios 参数中指定对应值。
          * @param alphas colors 数组中对应颜色的 alpha 值数组。
          * @param ratios 颜色分布比率的数组。有效值为 0 到 255。
-         * @param matrix 一个由 egret.Matrix 类定义的转换矩阵。egret.Matrix 类包括 createGradientBox() 方法，通过该方法可以方便地设置矩阵，以便与 beginGradientFill() 方法一起使用
+         * @param matrix 一个由 Turkey.Matrix 类定义的转换矩阵。Turkey.Matrix 类包括 createGradientBox() 方法，通过该方法可以方便地设置矩阵，以便与 beginGradientFill() 方法一起使用
          * @param beforePath 插入在指定的路径命令之前绘制，通常是插入到当前正在绘制的线条路径之前，以确保线条总在填充的上方。
          */
         public beginGradientFill(type:string, colors:number[], alphas:number[], ratios:number[],
-                                 matrix?:egret.Matrix, beforePath?:Path2D):Path2D {
-            let m = new egret.Matrix();
+                                 matrix?:Turkey.Matrix, beforePath?:Path2D):Path2D {
+            let m = new Turkey.Matrix();
             if (matrix) {
                 m.a = matrix.a * 819.2;
                 m.b = matrix.b * 819.2;

@@ -1,10 +1,10 @@
 namespace Turkey{
 
      /**
-     * @class egret.DropShadowFilter
+     * @class Turkey.DropShadowFilter
      * @classdesc
      * 可使用 DropShadowFilter 类向显示对象添加投影。
-     * @extends egret.GlowFilter
+     * @extends Turkey.GlowFilter
      * @version Egret 3.1.4
      * @platform Web,Native
      */
@@ -12,7 +12,7 @@ namespace Turkey{
 
         /**
          * 初始化 DropShadowFilter 对象
-         * @method egret.DropShadowFilter#constructor
+         * @method Turkey.DropShadowFilter#constructor
          * @param distance {number} 阴影的偏移距离，以像素为单位。
          * @param angle {number} 阴影的角度，0 到 360 度（浮点）。
          * @param color {number} 光晕颜色，采用十六进制格式 0xRRGGBB。默认值为 0xFF0000。

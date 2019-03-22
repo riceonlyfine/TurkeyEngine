@@ -49,7 +49,7 @@ namespace Turkey {
     locale_strings[1044] = "当前的 runtime 版本不支持视频播放,请使用最新的版本";
     locale_strings[1045] = "没有设置要加载的资源地址";
     locale_strings[1046] = "BitmapText 找不到对应字符:{0}，请检查配置文件";
-    locale_strings[1047] = "egret.localStorage.setItem保存失败,key={0}&value={1}";
+    locale_strings[1047] = "Turkey.localStorage.setItem保存失败,key={0}&value={1}";
     locale_strings[1048] = "视频加载失败";
     locale_strings[1049] = "声音在没有加载完之前不允许播放";
     locale_strings[1050] = "ExternalInterface调用了js没有注册的方法: {0}";

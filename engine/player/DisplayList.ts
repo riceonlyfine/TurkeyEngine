@@ -117,7 +117,7 @@ namespace Turkey.sys{
                 let width = surface.width;
                 let height = surface.height;
                 if (!this.bitmapData) {
-                    this.bitmapData = new egret.BitmapData(surface);
+                    this.bitmapData = new Turkey.BitmapData(surface);
                 }
                 else {
                     this.bitmapData.source = surface;
@@ -140,7 +140,7 @@ namespace Turkey.sys{
             systemRenderer.render(this.root, this.renderBuffer, this.offsetMatrix);
         }
 
-        private bitmapData: egret.BitmapData;
+        private bitmapData: Turkey.BitmapData;
 
         /**
          * @private
@@ -183,9 +183,6 @@ namespace Turkey.sys{
         public static $setCanvasScale(x: number, y: number): void {
             DisplayList.$canvasScaleX = x;
             DisplayList.$canvasScaleY = y;
-            if (egret.nativeRender) {
-                egret_native.nrSetCanvasScaleFactor(DisplayList.$canvasScaleFactor, x, y);
-            }
         }
     }
 }

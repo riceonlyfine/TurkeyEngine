@@ -264,7 +264,7 @@ namespace Turkey{
          * 捕获阶段 (EventPhase.CAPTURING_PHASE)。
          * 目标阶段 (EventPhase.AT_TARGET)。
          * 冒泡阶段 (EventPhase.BUBBLING_PHASE)。
-         * @see egret.EventPhase
+         * @see Turkey.EventPhase
          * @version Egret 2.4
          * @platform Web,Native
          * @language zh_CN
@@ -393,8 +393,8 @@ namespace Turkey{
         /**
          * 当事件实例传递给Event.release()静态方法时，实例上的clean()方法将会被自动调用。
          * 若此自定义事件的实例设计为可以循环复用的，为了避免引起内存泄露，自定义事件需要覆盖此方法来确保实例被缓存前断开对外部对象的一切引用。
-         * @see egret.Event.create()
-         * @see egret.Event.release()
+         * @see Turkey.Event.create()
+         * @see Turkey.Event.release()
          * @version Egret 2.4
          * @platform Web,Native
          * @language zh_CN
@@ -408,11 +408,11 @@ namespace Turkey{
       
         /**
          * 使用指定的 EventDispatcher 对象来抛出 Event 事件对象。抛出的对象将会缓存在对象池上，供下次循环复用。
-         * @param target {egret.IEventDispatcher} 派发事件目标
+         * @param target {Turkey.IEventDispatcher} 派发事件目标
          * @param type {string} 事件类型
          * @param bubbles {boolean} 确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
          * @param data {any} 事件data
-         * @method egret.Event.dispatchEvent
+         * @method Turkey.Event.dispatchEvent
          * @version Egret 2.4
          * @platform Web,Native
          * @language zh_CN
